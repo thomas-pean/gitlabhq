@@ -219,6 +219,8 @@ Devise.setup do |config|
       method:   Gitlab.config.ldap['method'],
       bind_dn:  Gitlab.config.ldap['bind_dn'],
       password: Gitlab.config.ldap['password'],
+			second_uid: Gitlab.config.ldap['second_uid'],
+			second_base: Gitlab.config.ldap['second_base'],
       name_proc: email_stripping_proc
   end
 
