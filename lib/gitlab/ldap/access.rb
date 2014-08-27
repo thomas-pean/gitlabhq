@@ -27,13 +27,8 @@ module Gitlab
       end
 
       def allowed?(user)
-        if Gitlab::LDAP::Person.find_by_dn(user.extern_uid, adapter)
-          !Gitlab::LDAP::Person.active_directory_disabled?(user.extern_uid, adapter)
-        else
-          false
-        end
-      rescue
-        false
+				# not using Active Directory where users can be disabled
+        true;
       end
     end
   end

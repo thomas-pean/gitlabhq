@@ -73,12 +73,29 @@ module Gitlab
         end
 
         def email
-          auth.info.email.downcase unless auth.info.email.nil?
+ 				 if auth.info.email.nil?
+					 result = extract_login_from_uid
+					 result+"@jouve.fr"
+				 else
+					 auth.info.email.downcase
+				 end
         end
+
+				def extract_login_from_uid
+          chunks = uid.split(',')
+					first = chunks[0]
+					chunks = first.split('=')
+					first = chunks[1]
+					first
+				end
 
         def name
           if auth.info.name.nil?
-            "#{auth.info.first_name} #{auth.info.last_name}".force_encoding('utf-8')
+						if auth.info.first_name.nil? and auth.info.last_name.nil?
+              extract_login_from_uid
+            else
+              "#{auth.info.first_name} #{auth.info.last_name}".force_encoding('utf-8')
+						end
           else
             auth.info.name.to_s.force_encoding('utf-8')
           end

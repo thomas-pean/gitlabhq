@@ -93,7 +93,11 @@ module Gitlab
         end
 
         def username
-          auth.info.nickname.to_s.force_encoding("utf-8")
+					if auth.info.nickname.nil?
+            extract_login_from_uid
+          else
+            auth.info.nickname.to_s.force_encoding("utf-8")
+          end
         end
 
         def provider
