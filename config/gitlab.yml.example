@@ -247,9 +247,8 @@ production: &base
     # piwik_site_id: '_your_piwik_site_id'
 
     ## Text under sign-in page (Markdown enabled)
-    # sign_in_text: |
-    #   ![Company Logo](http://www.companydomain.com/logo.png)
-    #   [Learn more about CompanyName](http://www.companydomain.com/)
+    sign_in_text: |
+      ![Company Logo](http://www.jouve.com/sites/all/themes/custom/jouve/logo.png)
 
 development:
   <<: *base
