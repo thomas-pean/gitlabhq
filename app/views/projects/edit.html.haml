@@ -47,7 +47,7 @@
               = f.label :issues_enabled, "Issues", class: 'control-label'
               .col-sm-10
                 .checkbox
-                  = f.check_box :issues_enabled
+                  = f.check_box :issues_enabled, :disabled => true
                   %span.descr Lightweight issue tracking system for this project
 
             - if Project.issues_tracker.values.count > 1
@@ -70,7 +70,7 @@
               = f.label :wiki_enabled, "Wiki", class: 'control-label'
               .col-sm-10
                 .checkbox
-                  = f.check_box :wiki_enabled
+                  = f.check_box :wiki_enabled, :disabled => true
                   %span.descr Pages for project documentation
 
             .form-group
