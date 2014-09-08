@@ -38,9 +38,9 @@ production: &base
     # Email server smtp settings are in [a separate file](initializers/smtp_settings.rb.sample).
 
     ## User settings
-    default_projects_limit: 10
-    # default_can_create_group: false  # default: true
-    # username_changing_enabled: false # default: true - User can change her username/namespace
+    default_projects_limit: 10000
+    default_can_create_group: false  # default: true
+    username_changing_enabled: false # default: true - User can change her username/namespace
     ## Default theme
     ##   BASIC  = 1
     ##   MARS   = 2
