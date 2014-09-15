@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   default_value_for :hide_no_ssh_key, false
   default_value_for :projects_limit, gitlab_config.default_projects_limit
   default_value_for :theme_id, gitlab_config.default_theme
+  # default_value_for :extern, false
 
   devise :database_authenticatable, :lockable, :async,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable, :registerable
@@ -179,6 +180,8 @@ class User < ActiveRecord::Base
   scope :ldap, -> { where(provider:  'ldap') }
 
   scope :potential_team_members, ->(team) { team.members.any? ? active.not_in_team(team) : active  }
+
+  #scope :extern, -> { where('email NOT LIKE "%@jouve.fr"') }
 
   #
   # Class methods
@@ -300,6 +303,11 @@ class User < ActiveRecord::Base
 
   def is_admin?
     admin
+  end
+
+  def is_extern?
+    # Jouve ITS Specification to integrate external users
+    self.email !~ /@jouve.fr/
   end
 
   def require_ssh_key?

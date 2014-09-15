@@ -85,8 +85,16 @@ class Ability
           rules += project_guest_rules
         end
 
-        if project.public? || project.internal?
+        if project.public?
           rules += public_project_rules
+        end
+
+        if project.internal? 
+          if user.is_extern?
+            rules += project_guest_rules
+          else
+            rules += public_project_rules
+          end
         end
 
         if project.owner == user || user.admin?
