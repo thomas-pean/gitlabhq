@@ -1,18 +1,6 @@
 # Public access
 
-GitLab allows you to open selected projects to be accessed **publicly** or **internally**.
-
-Projects with either of these visibility levels will be listed in the [public access directory](/public).
-
-Internal projects will only be available to authenticated users.
-
-## Public projects
-
-Public projects can be cloned **without any** authentication.
-
-It will also be listed on the [public access directory](/public).
-
-**Any logged in user** will have [Guest](../permissions/permissions) permissions on the repository.
+Public projects have been disabled by administrators.
 
 ## Internal projects
 
