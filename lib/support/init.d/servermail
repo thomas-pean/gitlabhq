@@ -1,0 +1,85 @@
+#!/bin/sh
+
+# GitLab Server Mail
+# Maintainer: Antoine Fouilleul
+# Authors: afouilleul@jouve.fr
+ 
+### BEGIN INIT INFO
+# Provides:          gitlab_server_mail
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Server mail to receive json data from gitlab web hooks.
+# Description:       This server send a mail to gitlab's admin when a project is created.
+# chkconfig: - 85 14
+### END INIT INFO
+ 
+DIR=/home/git/gitlab/bin
+APPBIN=/usr/bin/python
+DAEMON=$DIR/server_mail.py
+DAEMON_NAME=gitlab_server_mail
+LOGFILE=/home/git/gitlab/log/$DAEMON_NAME/error.log
+LOCKFILE=/var/lock/subsys/$DAEMON_NAME
+
+LOGPATH=$(dirname $LOGFILE) 
+
+# Add any command line options for your daemon here
+DAEMON_OPTS=""
+ 
+# This next line determines what user the script runs as.
+DAEMON_USER=root
+ 
+. /etc/rc.d/init.d/functions
+
+do_start () {
+    [ -x $prog ] || exit 5
+    [ -d $LOGPATH ] || mkdir $LOGPATH
+    [ -f $LOGFILE ] || touch $LOGFILE
+
+    echo -n "Starting system $DAEMON_NAME daemon"
+    daemon --user=$DAEMON_USER "$APPBIN $DAEMON $DAEMON_OPTS >>$LOGFILE &"
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $LOCKFILE
+    return $RETVAL
+}
+do_stop () {
+    echo -n "Stopping system $DAEMON_NAME daemon"
+    killproc $APPBIN
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
+    return $RETVAL
+}
+
+rh_status () {
+    status $prog
+}
+
+rh_status_q () {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+ 
+    start|stop)
+        rh_status_q && exit 0
+        do_${1}
+        ;;
+ 
+    restart|reload|force-reload)
+        do_stop
+        do_start
+        ;;
+ 
+    status)
+        rh_status
+        ;;
+    *)
+        echo "Usage: service $DAEMON_NAME {start|stop|restart|status}"
+        exit 1
+        ;;
+ 
+esac
+exit 0
