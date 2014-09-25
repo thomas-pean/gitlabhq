@@ -24,8 +24,12 @@
                 %h2 Based on Gitlab
 
                 %p.lead
-                  Unauthorized usage strictly prohibited.
-                  Access repositories using your LDAP account, an applicative LDAP account, or a local account.
+                  Unauthorized usage strictly prohibited.<br/>
+                  Access repositories using :<br/>
+                  %ul
+                    %li The email of your LDAP account (<i>someone@jouve.fr</i>)<br/>
+                    %li The login of an applicative LDAP account (<i>app_something</i>)<br/>
+                    %li The email of a local account provided to you by Jouve
 
           .col-md-5
             = yield
