@@ -5,9 +5,9 @@
     - if ldap_enabled? && gitlab_config.signin_enabled
       %ul.nav.nav-tabs
         %li.active
-          = link_to 'LDAP', '#tab-ldap', 'data-toggle' => 'tab'
+          = link_to 'Jouve LDAP', '#tab-ldap', 'data-toggle' => 'tab'
         %li
-          = link_to 'Standard', '#tab-signin', 'data-toggle' => 'tab'
+          = link_to 'Local account', '#tab-signin', 'data-toggle' => 'tab'
       .tab-content
         %div#tab-ldap.tab-pane.active
           = render partial: 'devise/sessions/new_ldap'
