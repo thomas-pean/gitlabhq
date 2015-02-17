@@ -75,7 +75,8 @@ module Gitlab
           ldap_user = ldap.bind_as(
             filter: filter,
             size: 1,
-            password: password
+            password: password,
+	    username: login
           )
 
           find_by_uid(ldap_user.dn) if ldap_user
