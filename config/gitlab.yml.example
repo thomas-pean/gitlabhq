@@ -135,6 +135,12 @@ production: &base
     method: 'plain' # "tls" or "ssl" or "plain"
     bind_dn: ''
     password: ''
+
+    # Set a timeout, in seconds, for LDAP queries. This helps avoid blocking
+    # a request if the LDAP server becomes unresponsive.
+    # A value of 0 means there is no timeout.
+    timeout: 10
+
     # If allow_username_or_email_login is enabled, GitLab will ignore everything
     # after the first '@' in the LDAP username submitted by the user on login.
     #
