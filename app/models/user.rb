@@ -307,7 +307,7 @@ class User < ActiveRecord::Base
 
   def is_extern?
     # Jouve ITS Specification to integrate external users
-    self.email !~ /@jouve.fr/
+    (self.email !~ /@jouve.fr/) && (self.email !~ /@jouve.com/) && (self.email !~ /@pureagency.com/)
   end
 
   def require_ssh_key?
