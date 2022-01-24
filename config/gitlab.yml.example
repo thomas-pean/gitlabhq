@@ -254,7 +254,7 @@ production: &base
 
     ## Text under sign-in page (Markdown enabled)
     sign_in_text: |
-      ![Company Logo](http://www.jouve.com/sites/all/themes/custom/jouve/logo.png)
+      ![Company Logo](/assets/company-logo.png)
 
 development:
   <<: *base

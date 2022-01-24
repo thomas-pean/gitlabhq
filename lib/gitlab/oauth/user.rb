@@ -75,7 +75,7 @@ module Gitlab
         def email
  				 if auth.info.email.nil?
 					 result = extract_login_from_uid
-					 result+"@jouve.fr"
+					 result+"@luminess.eu"
 				 else
 					 auth.info.email.downcase
 				 end
